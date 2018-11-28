@@ -1,4 +1,4 @@
-package com.itacademy.rating.Model;
+package com.itacademy.rating.model;
 
 import javax.persistence.*;
 
@@ -17,7 +17,9 @@ public class Video
     public Video() {
     }
 
-    public Video(String name, Itinerary itinerary) {
+    public Video(String name, Itinerary itinerary)  throws InvalidVideoParams
+    {
+        if (name.equals("") || itinerary == null)
         this.name = name;
         this.itinerary = itinerary;
     }
