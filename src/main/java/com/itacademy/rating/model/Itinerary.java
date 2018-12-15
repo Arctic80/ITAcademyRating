@@ -1,6 +1,14 @@
 package com.itacademy.rating.model;
 
-import javax.persistence.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Arrays;
+
 
 @Entity
 public class Itinerary
@@ -15,10 +23,10 @@ public class Itinerary
 
     public Itinerary(){}
 
-    public Itinerary(String itinerary) throws WrongItineraryException
+    public Itinerary(String itinerary) throws ResponseStatusException
     {
-        if (itinerary.equals(BE) || itinerary.equals(FE) || itinerary.equals(AD)) this.id = itinerary;
-        else throw new WrongItineraryException();
+        if (Arrays.asList(BE, FE, AD).contains(itinerary)) this.id = itinerary;
+        else throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
     }
 
     public String getId(){

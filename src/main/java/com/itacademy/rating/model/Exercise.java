@@ -1,9 +1,11 @@
 package com.itacademy.rating.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 public class Exercise
@@ -14,12 +16,20 @@ public class Exercise
 
     private String name;
 
-    public Exercise(){
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Itinerary itinerary;
 
+    public Exercise(){}
+
+    public Exercise(String name, @NotNull Itinerary itinerary) throws ResponseStatusException
+    {
+        if (name.isEmpty() || itinerary == null) throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
+        this.name = name;
+        this.itinerary = itinerary;
     }
 
-    public Exercise(String name){
-        this.name = name;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
