@@ -25,7 +25,7 @@ public class RatingApplication {
         {
             try
             {
-                User u1 = new User("43550300F");
+                User u1 = new User("43170873B");
                 System.out.println("Dni correcto");
             }
             catch (ResponseStatusException e)

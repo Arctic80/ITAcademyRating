@@ -1,10 +1,8 @@
 package com.itacademy.rating.model;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.server.ServerWebInputException;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -16,14 +14,14 @@ public class Exercise
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Itinerary itinerary;
 
     public Exercise(){}
 
-    public Exercise(String name, @NotNull Itinerary itinerary) throws ResponseStatusException
+    public Exercise(String name, Itinerary itinerary)
     {
-        if (name.isEmpty() || itinerary == null) throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
+        if (name.isEmpty() || itinerary == null) throw new ServerWebInputException("Empty or null parameters");
         this.name = name;
         this.itinerary = itinerary;
     }

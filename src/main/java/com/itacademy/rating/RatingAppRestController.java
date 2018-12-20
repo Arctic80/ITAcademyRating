@@ -6,9 +6,10 @@ import com.itacademy.rating.model.User;
 import com.itacademy.rating.model.Video;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -18,27 +19,27 @@ public class RatingAppRestController {
     RatingAppService ratingAppService;
 
     @PostMapping("/users")
-    public void validateUser(@RequestBody User user) throws ResponseStatusException {
+    public void validateUser(@RequestBody User user) {
         ratingAppService.validateUser(user);
     }
 
-    @GetMapping("/{itineraryId}/videos")
-    public Iterable<Video> getVideos(@PathVariable String itineraryId) {
-        return ratingAppService.getVideos(itineraryId);
+    @GetMapping("/{itineraryCode}/videos")
+    public List<Video> getVideos(@PathVariable String itineraryCode) {
+        return ratingAppService.getVideos(itineraryCode);
     }
 
-    @GetMapping("/{itineraryId}/exercises")
-    public Iterable<Exercise> getExercises(@PathVariable String itineraryId) {
-        return ratingAppService.getExercises(itineraryId);
+    @GetMapping("/{itineraryCode}/exercises")
+    public List<Exercise> getExercises(@PathVariable String itineraryCode) {
+        return ratingAppService.getExercises(itineraryCode);
     }
 
-    @PostMapping("/{itineraryId}/videos/{videoId}")
-    public void rateVideo(@PathVariable String itineraryId, @PathVariable int videoId,@Validated @RequestBody Rating rating) throws ResponseStatusException {
-        ratingAppService.rateVideo(rating, videoId);
+    @PostMapping("/{itineraryCode}/videos/{videoId}")
+    public void rateVideo(@PathVariable String itineraryCode, @PathVariable int videoId, @Valid @RequestBody Rating rating) {
+        ratingAppService.rateVideo(rating, itineraryCode, videoId);
     }
 
-    @PostMapping("/{itineraryId}/exercises/{exerciseId}")
-    public void rateExercise(@PathVariable String itineraryId, @PathVariable int exerciseId, @Validated @RequestBody Rating rating) throws ResponseStatusException {
-        ratingAppService.rateExercise(rating, exerciseId);
+    @PostMapping("/{itineraryCode}/exercises/{exerciseId}")
+    public void rateExercise(@PathVariable String itineraryCode, @PathVariable int exerciseId, @Valid @RequestBody Rating rating) {
+        ratingAppService.rateExercise(rating, itineraryCode, exerciseId);
     }
 }

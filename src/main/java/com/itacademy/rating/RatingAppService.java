@@ -1,18 +1,15 @@
 package com.itacademy.rating;
 
-import com.itacademy.rating.model.Exercise;
-import com.itacademy.rating.model.Rating;
-import com.itacademy.rating.model.User;
-import com.itacademy.rating.model.Video;
+import com.itacademy.rating.model.*;
 import com.itacademy.rating.repositories.ExerciseRepository;
 import com.itacademy.rating.repositories.RatingRepository;
 import com.itacademy.rating.repositories.UserRepository;
 import com.itacademy.rating.repositories.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.server.ServerWebInputException;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -31,28 +28,46 @@ public class RatingAppService {
     @Autowired
     RatingRepository ratingRepository;
 
-
-    public void validateUser(User user) throws ResponseStatusException {
-        if (!userRepository.findByDni(user.getDni()).iterator().hasNext()) throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
+    public void validateUser(User user)
+    {
+        if (userRepository.findByDni(user.getDni()) == null) throw new ServerWebInputException("DNI does not exist");
     }
 
-    public Iterable<Video> getVideos(String itineraryID) {
-        return videoRepository.findByItinerary(itineraryID);
+    public List<Video> getVideos(String itineraryCode)
+    {
+        checkItineraryCode(itineraryCode);
+        return videoRepository.findByItineraryCode(itineraryCode);
     }
 
-    public Iterable<Exercise> getExercises(String itineraryID) {
-        return exerciseRepository.findByItinerary(itineraryID);
+    public List<Exercise> getExercises(String itineraryCode)
+    {
+        checkItineraryCode(itineraryCode);
+        return exerciseRepository.findByItineraryCode(itineraryCode);
     }
 
-    public void rateVideo(Rating rating, int videoId) {
+    public void rateVideo(Rating rating, String itineraryCode, int videoId)
+    {
+        checkItineraryCode(itineraryCode);
         Optional<Video> video = videoRepository.findById(videoId);
+
+        if (video.isEmpty()) throw new ServerWebInputException("Video with Id: " + videoId +" does not exist");
+
         rating.setVideo(video.get());
         ratingRepository.save(rating);
-    }
+     }
 
-    public void rateExercise(Rating rating, int exerciseId) {
+    public void rateExercise(Rating rating, String itineraryCode, int exerciseId)
+    {
+        checkItineraryCode(itineraryCode);
         Optional<Exercise> exercise = exerciseRepository.findById(exerciseId);
+
+        if (exercise.isEmpty()) throw new ServerWebInputException("Exercise with Id: " + exerciseId +" does not exist");
         rating.setExercise(exercise.get());
         ratingRepository.save(rating);
+    }
+
+    private void checkItineraryCode(String itineraryCode)
+    {
+        if (!Itinerary.ITINERARY_CODES.contains(itineraryCode)) throw new ServerWebInputException("Wrong Itinerary Code");
     }
 }

@@ -1,7 +1,6 @@
 package com.itacademy.rating.model;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.server.ServerWebInputException;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,9 +16,9 @@ public class User
 
     public User() {}
 
-    public User(String dni) throws ResponseStatusException
+    public User(String dni)
     {
-        if (!checkDni(dni)) throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
+        if (!checkDni(dni)) throw new ServerWebInputException("Bad Dni");
         this.dni = dni;
     }
 

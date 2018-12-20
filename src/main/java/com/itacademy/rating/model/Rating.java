@@ -1,8 +1,6 @@
 package com.itacademy.rating.model;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.server.ServerWebInputException;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,10 +13,9 @@ public class Rating
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull
-    private int rating;
+    @NotNull(message = "Must set 'rating' attribute")
+    private Integer rating;
 
-    @Nullable
     private String comment;
 
     @ManyToOne
@@ -28,36 +25,26 @@ public class Rating
     private Exercise exercise;
 
 
-    public Rating() {}
+    public Rating(){}
 
-    public Rating(int rating) throws ResponseStatusException
+    public void setRating(Integer rating)
     {
-        if (rating < 1 || rating > 5) throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
+        if (rating < 1 || rating > 5) throw new ServerWebInputException("Rating must be between 1 and 5");
         this.rating = rating;
     }
 
-    @Nullable
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(@Nullable String comment) {
+    public void setComment(String comment)
+    {
         this.comment = comment;
     }
 
-    public Video getVideo() {
-        return video;
-    }
-
-    public void setVideo(Video video) {
+    public void setVideo(Video video)
+    {
         this.video = video;
     }
 
-    public Exercise getExercise() {
-        return exercise;
-    }
-
-    public void setExercise(Exercise exercise) {
+    public void setExercise(Exercise exercise)
+    {
         this.exercise = exercise;
     }
 }

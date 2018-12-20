@@ -1,11 +1,8 @@
 package com.itacademy.rating.model;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.server.ServerWebInputException;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -15,17 +12,16 @@ public class Video
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull @NotEmpty
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Itinerary itinerary;
 
     public Video() {}
 
-    public Video(String name, Itinerary itinerary) throws ResponseStatusException
+    public Video(String name, Itinerary itinerary)
     {
-        if (name.isEmpty() || itinerary == null) throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
+        if (name.isEmpty() || itinerary == null) throw new ServerWebInputException("Not empty/null Name and Itinerary are required");
         this.name = name;
         this.itinerary = itinerary;
     }
@@ -36,10 +32,5 @@ public class Video
 
     public String getName() {
         return name;
-    }
-
-    // Not "getItinerary" to exclude field from JSON
-    public Itinerary getVideoItinerary() {
-        return itinerary;
     }
 }
