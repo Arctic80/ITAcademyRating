@@ -13,6 +13,6 @@ used in the BackEnd, FrontEnd and Android itineraries.
 
 1. Execute: `git clone https://github.com/Arctic80/ITAcademyRating.git` or download zip.
 2. cd into newly created folder.
-3. Edit "pom.xml" property to `<java.version>11</java.version>` to use Java 11 instead of Java 8.
+3. If needed, edit "pom.xml" property to `<java.version>11</java.version>` to use Java 11 instead of Java 8.
 4. execute: `mvn spring-boot:run` (need Maven installed).
 </html>
