@@ -50,7 +50,7 @@ public class RatingAppService {
         checkItineraryCode(itineraryCode);
         Optional<Video> video = videoRepository.findById(videoId);
 
-        if (video.isEmpty()) throw new ServerWebInputException("Video with Id: " + videoId +" does not exist");
+        if (!video.isPresent()) throw new ServerWebInputException("Video with Id: " + videoId +" does not exist");
 
         rating.setVideo(video.get());
         ratingRepository.save(rating);
@@ -61,7 +61,7 @@ public class RatingAppService {
         checkItineraryCode(itineraryCode);
         Optional<Exercise> exercise = exerciseRepository.findById(exerciseId);
 
-        if (exercise.isEmpty()) throw new ServerWebInputException("Exercise with Id: " + exerciseId +" does not exist");
+        if (!exercise.isPresent()) throw new ServerWebInputException("Exercise with Id: " + exerciseId +" does not exist");
         rating.setExercise(exercise.get());
         ratingRepository.save(rating);
     }
