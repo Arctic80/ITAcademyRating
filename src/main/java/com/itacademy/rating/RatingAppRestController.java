@@ -23,6 +23,11 @@ public class RatingAppRestController {
         ratingAppService.validateUser(user);
     }
 
+    @GetMapping("/users")
+    public List<User> getUsers(){
+        return ratingAppService.getAllUsers();
+    }
+
     @GetMapping("/{itineraryCode}/videos")
     public List<Video> getVideos(@PathVariable String itineraryCode) {
         return ratingAppService.getVideos(itineraryCode);

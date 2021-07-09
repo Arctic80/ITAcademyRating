@@ -16,7 +16,7 @@
     <version>0.0.1</version>
     <name>Rating</name>
     <description>Course video &amp; exercises rating system</description>
-    
+
     <properties>
         <java.version>11</java.version>
     </properties>

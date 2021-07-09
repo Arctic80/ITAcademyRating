@@ -5,12 +5,15 @@ import com.itacademy.rating.repositories.ExerciseRepository;
 import com.itacademy.rating.repositories.RatingRepository;
 import com.itacademy.rating.repositories.UserRepository;
 import com.itacademy.rating.repositories.VideoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ServerWebInputException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 
 @Service
@@ -69,5 +72,11 @@ public class RatingAppService {
     private void checkItineraryCode(String itineraryCode)
     {
         if (!Itinerary.ITINERARY_CODES.contains(itineraryCode)) throw new ServerWebInputException("Wrong Itinerary Code");
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        userRepository.findAll().iterator().forEachRemaining(users::add);
+        return users;
     }
 }
