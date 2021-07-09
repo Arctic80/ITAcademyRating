@@ -1,6 +1,7 @@
-package com.itacademy.rating.repositories;
+package com.arcticsoft.rating.repositories;
 
-import com.itacademy.rating.model.User;
+import com.arcticsoft.rating.model.User;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

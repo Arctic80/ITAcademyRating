@@ -1,10 +1,11 @@
-package com.itacademy.rating.repositories;
+package com.arcticsoft.rating.repositories;
 
-import com.itacademy.rating.model.Video;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import com.arcticsoft.rating.model.Video;
 
 
 @Repository

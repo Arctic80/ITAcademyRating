@@ -1,14 +1,15 @@
-package com.itacademy.rating;
-
-import com.itacademy.rating.model.Exercise;
-import com.itacademy.rating.model.Rating;
-import com.itacademy.rating.model.User;
-import com.itacademy.rating.model.Video;
+package com.arcticsoft.rating;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import com.arcticsoft.rating.model.Exercise;
+import com.arcticsoft.rating.model.Rating;
+import com.arcticsoft.rating.model.User;
+import com.arcticsoft.rating.model.Video;
+
 import java.util.List;
 
 

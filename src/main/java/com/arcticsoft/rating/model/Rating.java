@@ -1,4 +1,4 @@
-package com.itacademy.rating.model;
+package com.arcticsoft.rating.model;
 
 import org.springframework.web.server.ServerWebInputException;
 

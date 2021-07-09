@@ -1,10 +1,4 @@
-package com.itacademy.rating;
-
-import com.itacademy.rating.model.*;
-import com.itacademy.rating.repositories.ExerciseRepository;
-import com.itacademy.rating.repositories.RatingRepository;
-import com.itacademy.rating.repositories.UserRepository;
-import com.itacademy.rating.repositories.VideoRepository;
+package com.arcticsoft.rating;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +7,12 @@ import org.springframework.web.server.ServerWebInputException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
+
+import com.arcticsoft.rating.model.*;
+import com.arcticsoft.rating.repositories.ExerciseRepository;
+import com.arcticsoft.rating.repositories.RatingRepository;
+import com.arcticsoft.rating.repositories.UserRepository;
+import com.arcticsoft.rating.repositories.VideoRepository;
 
 
 @Service

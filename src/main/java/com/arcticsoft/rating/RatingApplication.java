@@ -1,6 +1,6 @@
-package com.itacademy.rating;
+package com.arcticsoft.rating;
 
-import com.itacademy.rating.model.User;
+import com.arcticsoft.rating.model.User;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

@@ -8,14 +8,13 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.5.2</version>
         <relativePath/>
-        <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.arcticsoft</groupId>
-    <artifactId>ratingSystem</artifactId>
-    <version>0.0.1</version>
+    <artifactId>rating</artifactId>
+    <version>1.0.0</version>
     <name>Rating</name>
-    <description>Course video &amp; exercises rating system</description>
+    <description>Teaching material rating system</description>
 
     <properties>
         <java.version>11</java.version>
@@ -37,10 +36,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
