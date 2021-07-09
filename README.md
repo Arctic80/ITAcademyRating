@@ -9,6 +9,5 @@ used in the BackEnd, FrontEnd and Android itineraries.
 
 1. Clone or download zip.
 2. Cd into newly created folder.
-3. If needed, edit "pom.xml" property to `<java.version>11</java.version>` to use Java 11 instead of Java 8.
-4. Execute: `mvnw spring-boot:run`  or `mvn spring-boot:run` if you have Maven in your system and want to use it.
+3. Execute: `mvnw spring-boot:run`  or `mvn spring-boot:run` if you have Maven in your system and want to use it.
 </html>
